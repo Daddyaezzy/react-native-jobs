@@ -56,7 +56,9 @@ const seeAll = () => {
             renderItem={({ item }) => (
               <NearbyJobCard
                 job={item}
-                handleNavigate={() => router.push(`/home/job-details`)}
+                handleNavigate={() =>
+                  router.push(`/home/job-details/${item.job_id}`)
+                }
               />
             )}
             keyExtractor={(item) => `nearby-job-${item?.job_id}`}

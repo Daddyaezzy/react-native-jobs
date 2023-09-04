@@ -19,7 +19,7 @@ import {
 } from "../../../../components";
 import { COLORS, icons, SIZES } from "../../../../constants";
 import useFetch from "../../../../hook/useFetch";
-import Share from "react-native-share";
+import * as Sharing from "expo-sharing";
 
 const tabs = ["About", "Qualifications", "Responsibilities"];
 
@@ -38,15 +38,18 @@ const JobDetails = () => {
     setRefreshing(false);
   }, []);
 
-  // const share = () => {
-  //   const options = {
-  //     message: data[0]?.job_google_link,
-  //   };
-
-  //   Share.open(options)
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-  // };
+  const share = async () => {
+    try {
+      const isAvailable = await Sharing.isAvailableAsync();
+      if (isAvailable) {
+        await Sharing.shareAsync("data[0]?.job_google_link");
+      } else {
+        console.log("Sharing is not available on this device.");
+      }
+    } catch (error) {
+      console.error("Error sharing: ", error);
+    }
+  };
 
   const displayTabContent = () => {
     switch (activeTab) {
@@ -94,7 +97,7 @@ const JobDetails = () => {
           headerRight: () => (
             <ScreenHeaderBtn
               iconUrl={icons.share}
-              // handlePress={share}
+              handlePress={share}
               dimension="60%"
             />
           ),
@@ -146,3 +149,16 @@ const JobDetails = () => {
 };
 
 export default JobDetails;
+
+// import { View, Text } from "react-native";
+// import React from "react";
+
+// const Testing = () => {
+//   return (
+//     <View>
+//       <Text>Testing</Text>
+//     </View>
+//   );
+// };
+
+// export default Testing;

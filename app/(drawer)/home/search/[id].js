@@ -14,6 +14,9 @@ import { NearbyJobCard, ScreenHeaderBtn } from "../../../../components";
 
 import styles from "../../../../styles/search";
 import { COLORS, icons, SIZES } from "../../../../constants";
+import { RAPID_API_ENV } from "@env";
+
+const rapidApiKey = RAPID_API_ENV;
 
 const JobSearch = () => {
   const params = useLocalSearchParams();
@@ -29,20 +32,6 @@ const JobSearch = () => {
     setSearchResult([]);
 
     try {
-      // const options = {
-      //   method: "GET",
-      //   url: `https://jsearch.p.rapidapi.com/search`,
-      //   params: {
-      //     query: params.id,
-      //     page: page.toString(),
-      //   },
-      //   headers: {
-      //     "X-RapidAPI-Key":
-      //       "c260dd9bc4msh0880d926653afdap16a796jsn53e29b83e621",
-      //     "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-      //   },
-      // };
-
       const options = {
         method: "GET",
         url: `https://jsearch.p.rapidapi.com/search`,
@@ -51,8 +40,7 @@ const JobSearch = () => {
           page: page.toString(),
         },
         headers: {
-          "X-RapidAPI-Key":
-            "2ec4d9b7ddmsh99fcaf9d91a78e3p1009b6jsnb55856589d6b",
+          "X-RapidAPI-Key": rapidApiKey,
           "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
         },
       };

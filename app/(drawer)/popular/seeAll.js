@@ -56,7 +56,7 @@ const seeAll = () => {
               <NearbyJobCard
                 job={item}
                 handleNavigate={() =>
-                  router.push(`/job-details/${item.job_id}`)
+                  router.push(`/home/job-details/${item.job_id}`)
                 }
               />
             )}
